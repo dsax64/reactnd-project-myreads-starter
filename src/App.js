@@ -1,8 +1,9 @@
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css'
-import BookShelf from './BookShelf'
-import { Link, Route } from 'react-router-dom'
+import MyReads from './MyReads'
+import SearchPage from './SearchPage'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
     state = {
@@ -25,46 +26,15 @@ class BooksApp extends React.Component {
         return (
             <div className="app">
                 <Route path="/search" render={() => (
-                    <div className="search-books">
-                        <div className="search-books-bar">
-                            <Link to="/" className="close-search">Close</Link>
-                            <div className="search-books-input-wrapper">
-                                <input type="text" placeholder="Search by title or author"/>
-                            </div>
-                        </div>
-                        <div className="search-books-results">
-                            <ol className="books-grid"></ol>
-                        </div>
-                    </div>
+                    <SearchPage/>
                 )}/>
 
                 <Route exact path="/" render={() => (
-                    <div className="list-books">
-                        <div className="list-books-title">
-                            <h1>MyReads</h1>
-                        </div>
-                        <div className="list-books-content">
-                            <div>
-                                <BookShelf
-                                    title='Currently Reading'
-                                    books={this.state.currently_reading_books}
-                                />
-                                <BookShelf
-                                    title='Want to Read'
-                                    books={this.state.want_to_read_books}
-                                />
-                                <BookShelf
-                                    title='Read'
-                                    books={this.state.read_books}
-                                />
-                            </div>
-                        </div>
-                        <div className="open-search">
-                            <Link to="/search" className="add-contact">
-                                Add a book
-                            </Link>
-                        </div>
-                    </div>
+                    <MyReads
+                        currently_reading_books={this.state.currently_reading_books}
+                        want_to_read_books={this.state.want_to_read_books}
+                        read_books={this.state.read_books}
+                    />
                 )}/>
             </div>
         )
