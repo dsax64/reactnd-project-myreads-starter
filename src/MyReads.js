@@ -13,15 +13,18 @@ class MyReads extends Component {
                     <div>
                         <BookShelf
                             title='Currently Reading'
-                            books={this.props.currently_reading_books}
+                            books={this.props.currentlyReading}
+                            changeShelf={this.props.changeShelf}
                         />
                         <BookShelf
                             title='Want to Read'
-                            books={this.props.want_to_read_books}
+                            books={this.props.wantToRead}
+                            changeShelf={this.props.changeShelf}
                         />
                         <BookShelf
                             title='Read'
-                            books={this.props.read_books}
+                            books={this.props.read}
+                            changeShelf={this.props.changeShelf}
                         />
                     </div>
                 </div>

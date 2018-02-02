@@ -22,24 +22,41 @@ class BooksApp extends React.Component {
                 wantToRead: [],
                 read: []
             }
-            books.map( (book) => {  myBooks[book.shelf].push(book) })
-            console.log(myBooks)
+            books.map( (book) => ( myBooks[book.shelf].push(book) ))
             this.setState({ books: myBooks })
         })
+    }
+
+
+    changeShelf = (book, shelf) => {
+        BooksAPI.update(book, shelf).then( () => {
+            this.setState((prevState) => {
+                if (book.shelf) {
+                    prevState.books[book.shelf] = prevState.books[book.shelf].filter( (b) => b !== book)
+                }
+                prevState.books[shelf].push(book)
+                return {books: prevState.books};
+            });
+        })
+
+
     }
 
     render() {
         return (
             <div className="app">
                 <Route path="/search" render={() => (
-                    <SearchPage/>
+                    <SearchPage
+                        changeShelf={this.changeShelf}
+                    />
                 )}/>
 
                 <Route exact path="/" render={() => (
                     <MyReads
-                        currently_reading_books={this.state.books.currentlyReading}
-                        want_to_read_books={this.state.books.wantToRead}
-                        read_books={this.state.books.read}
+                        currentlyReading={this.state.books.currentlyReading}
+                        wantToRead={this.state.books.wantToRead}
+                        read={this.state.books.read}
+                        changeShelf={this.changeShelf}
                     />
                 )}/>
             </div>

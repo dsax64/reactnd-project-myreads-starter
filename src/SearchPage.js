@@ -34,6 +34,7 @@ class SearchPage extends Component {
                             <Book
                                 key={i}
                                 book={book}
+                                changeShelf={this.props.changeShelf}
                             />
                         ))}
                     </ol>
