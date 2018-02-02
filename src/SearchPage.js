@@ -33,9 +33,7 @@ class SearchPage extends Component {
                         {this.state.books.map((book, i) => (
                             <Book
                                 key={i}
-                                title={book.title}
-                                author={book.author}
-                                coverURL={book.imageLinks.smallThumbnail}
+                                book={book}
                             />
                         ))}
                     </ol>

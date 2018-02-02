@@ -11,9 +11,7 @@ class BookShelf extends Component {
                         {this.props.books.map((book, i) => (
                             <Book
                                 key={i}
-                                title={book.title}
-                                author={book.author}
-                                coverURL={book.coverURL}
+                                book={book}
                             />
                         ))}
                     </ol>
