@@ -12,6 +12,14 @@ class SearchPage extends Component {
         if (e.target.value) {
             BooksAPI.search(e.target.value).then( (result) => {
                 let books = (result !== undefined && result.error === undefined) ? result : [];
+                books.map( book => {
+                    let bookInMylist = this.props.books.find( b => b.id === book.id);
+                    if (bookInMylist !== undefined) {
+                        book.shelf = bookInMylist.shelf
+                    }
+
+                    return book
+                });
                 this.setState({ books })
             })
         } else {
