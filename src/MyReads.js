@@ -13,17 +13,17 @@ class MyReads extends Component {
                     <div>
                         <BookShelf
                             title='Currently Reading'
-                            books={this.props.currentlyReading}
+                            books={this.props.books.filter(book => book.shelf === 'currentlyReading')}
                             changeShelf={this.props.changeShelf}
                         />
                         <BookShelf
                             title='Want to Read'
-                            books={this.props.wantToRead}
+                            books={this.props.books.filter(book => book.shelf === 'wantToRead')}
                             changeShelf={this.props.changeShelf}
                         />
                         <BookShelf
                             title='Read'
-                            books={this.props.read}
+                            books={this.props.books.filter(book => book.shelf === 'read')}
                             changeShelf={this.props.changeShelf}
                         />
                     </div>

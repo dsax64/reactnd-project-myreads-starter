@@ -7,42 +7,22 @@ import * as BooksAPI from './BooksAPI'
 
 class BooksApp extends React.Component {
     state = {
-        books : {
-            currentlyReading: [],
-            wantToRead: [],
-            read: []
-
-        }
+        books : []
     }
 
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
-            let myBooks = {
-                currentlyReading: [],
-                wantToRead: [],
-                read: []
-            }
-            books.map( (book) => ( myBooks[book.shelf].push(book) ))
-            this.setState({ books: myBooks })
+            this.setState({ books })
         })
     }
 
 
     changeShelf = (book, shelf) => {
         BooksAPI.update(book, shelf).then( () => {
-            this.setState((prevState) => {
-                if (book.shelf) {
-                    prevState.books[book.shelf] = prevState.books[book.shelf].filter( (b) => b !== book)
-                }
-                if (shelf !== 'none') {
-                    book.shelf = shelf;
-                    prevState.books[shelf].push(book)
-                }
-                return {books: prevState.books};
-            });
-        })
-
-
+            BooksAPI.getAll().then((books) => {
+                this.setState({ books })
+            })
+        });
     }
 
     render() {
@@ -56,9 +36,7 @@ class BooksApp extends React.Component {
 
                 <Route exact path="/" render={() => (
                     <MyReads
-                        currentlyReading={this.state.books.currentlyReading}
-                        wantToRead={this.state.books.wantToRead}
-                        read={this.state.books.read}
+                        books={this.state.books}
                         changeShelf={this.changeShelf}
                     />
                 )}/>
