@@ -34,7 +34,10 @@ class BooksApp extends React.Component {
                 if (book.shelf) {
                     prevState.books[book.shelf] = prevState.books[book.shelf].filter( (b) => b !== book)
                 }
-                prevState.books[shelf].push(book)
+                if (shelf !== 'none') {
+                    book.shelf = shelf;
+                    prevState.books[shelf].push(book)
+                }
                 return {books: prevState.books};
             });
         })
