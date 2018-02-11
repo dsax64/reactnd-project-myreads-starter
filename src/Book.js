@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Book extends Component {
     onSelectChange = (e) => {
         this.props.changeShelf(this.props.book, e.target.value)
-    }
+    };
     render () {
         return (
             <li>
