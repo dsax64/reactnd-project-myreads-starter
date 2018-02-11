@@ -185,3 +185,10 @@ body, .app {
     text-align: center;
     font-size: 0.8em;
 }
+
+.not-found-image {
+    position: fixed;
+    width: 50%;
+    left: 25%;
+    right: 25%;
+}

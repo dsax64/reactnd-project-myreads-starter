@@ -2,8 +2,9 @@ import React from 'react'
 import './App.css'
 import MyReads from './MyReads'
 import SearchPage from './SearchPage'
-import { Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import NotFound from './NotFound'
 
 class BooksApp extends React.Component {
     state = {
@@ -28,19 +29,22 @@ class BooksApp extends React.Component {
     render() {
         return (
             <div className="app">
-                <Route path="/search" render={() => (
-                    <SearchPage
-                        books={this.state.books}
-                        changeShelf={this.changeShelf}
-                    />
-                )}/>
+                <Switch>
+                    <Route path="/search" render={() => (
+                        <SearchPage
+                            books={this.state.books}
+                            changeShelf={this.changeShelf}
+                        />
+                    )}/>
 
-                <Route exact path="/" render={() => (
-                    <MyReads
-                        books={this.state.books}
-                        changeShelf={this.changeShelf}
-                    />
-                )}/>
+                    <Route exact path="/" render={() => (
+                        <MyReads
+                            books={this.state.books}
+                            changeShelf={this.changeShelf}
+                        />
+                    )}/>
+                    <Route component={NotFound}/>
+                </Switch>
             </div>
         )
     }
