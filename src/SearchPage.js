@@ -38,9 +38,9 @@ class SearchPage extends Component {
                 </div>
                 <div className="search-books-results">
                     <ol className="books-grid">
-                        {this.state.books.map((book, i) => (
+                        {this.state.books.map((book) => (
                             <Book
-                                key={i}
+                                key={book.id}
                                 book={book}
                                 changeShelf={this.props.changeShelf}
                             />
